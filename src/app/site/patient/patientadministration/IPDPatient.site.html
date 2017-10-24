@@ -81,7 +81,7 @@
                 [editMode]="editMode"
                 [error] = "error?.fieldErrors"
                 (output)="dataContainer.roomDetailEntity=getRoomBed($event)"
-            >{{field[6]}}</dropdown-component>
+            >{{field[6]}} <sup style="color: red; font-size: 1.3em">*</sup></dropdown-component>
 
             <dropdown-component *ngIf="roombed != null"
                 [data] = "replaceByName(roombed, 'cd')"
@@ -90,7 +90,7 @@
                 [editMode]="editMode"
                 [error] = "error?.fieldErrors"
                 (output)="dataContainer.roomBedEntity=getValueRoomBed($event)"
-            >{{field[7]}}</dropdown-component>
+            >{{field[7]}} <sup style="color: red; font-size: 1.3em">*</sup></dropdown-component>
             
             <div class="form-group m-t-25">
                 <div class="pull-right p-r-10">

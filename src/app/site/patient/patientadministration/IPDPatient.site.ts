@@ -52,6 +52,19 @@ export class IPDPatientModifySite extends EditHelper implements Edit{
                 observable.subscribe(data => {
                     this.functionality = new Functionality();
                     this.functionality = data;
+                    /*
+                    RSSYSE-16
+                    Start Fix : Adding selection for room detail
+                    NEW
+                    */
+                    let observable: Observable<RoomDetail> = this.dataService_room.getRoomDetailAllData();
+                    observable.subscribe(data => {
+                        this.roomdetail = new RoomDetail();
+                        this.roomdetail = data;
+                    });
+                    /*
+                    End Fix
+                    */
                 });
             });
                 

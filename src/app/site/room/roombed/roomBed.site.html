@@ -21,7 +21,7 @@
                     <td>{{val.cd}}</td>
                     <td>{{val.roomDetailEntity.roomCategoryEntity.name}}</td>
                     <td>{{val.roomDetailEntity.cd}} - {{val.roomDetailEntity.name}}</td>
-                    <td>{{val.available ? 'Available' : 'Used'}}</td>
+                    <td>{{val.isAvailable ? 'Available' : 'Used'}}</td>
                     <td>{{val.dscp}}</td>
                     <td>
                         <table-action-component (detail)="detail(moduleName, val.id)" (delete)="delete(val.id)"></table-action-component>
