@@ -1,0 +1,101 @@
+<blockheader-component>{{pageParent}}</blockheader-component>
+
+<div class="card">
+    <form class="form-horizontal" role="form" *ngIf="functionality">
+        <div class="card-header ch-alt">
+            <h2>{{pageName}} (Rawat Jalan)<small>{{pageDescription}}</small></h2>
+        </div>
+        
+        <div class="card-body card-padding">
+            
+            <notification-component [value]="error?.error" [type]="'danger'"></notification-component>
+            
+            <delimiter-component>Patient Details</delimiter-component>
+
+            <div class="form-group">
+                <label for="nametemp" class="col-sm-2 control-label">{{field[0]}}</label>
+                <div class="col-sm-8">
+                    <div class="fg-line">
+                        <input type="text" name="nametemp" [ngModel]="nametemp" class="form-control" disabled required>
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <button class="btn btn-primary btn-icon btn-sm waves-effect waves-circle" data-toggle="modal" href="#modalWider"><i class="zmdi zmdi-search"></i></button>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="insurance" class="col-sm-2 control-label">{{field[1]}}</label>
+                <div class="col-sm-10">
+                    <div class="fg-line">
+                        <input type="text" name="insurance" [ngModel]="dataContainer.patientEntity?.insuranceEntity?.insurance" class="form-control" disabled required>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="insurancenumber" class="col-sm-2 control-label">{{field[2]}}</label>
+                <div class="col-sm-10">
+                    <div class="fg-line">
+                        <input type="text" name="insurancenumber" [ngModel]="dataContainer.patientEntity?.insurancenumber" class="form-control" disabled required>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="insuranceclass" class="col-sm-2 control-label">{{field[3]}}</label>
+                <div class="col-sm-10">
+                    <div class="fg-line">
+                        <input type="text" name="insuranceclass" [ngModel]="dataContainer.patientEntity?.roomCategoryEntity?.name" class="form-control" disabled required>
+                    </div>
+                </div>
+            </div>
+
+            <delimiter-component>Patient History</delimiter-component>
+            <patientadministration-table [child]="true" [filter1]="filter1" [filter1]="filter2"></patientadministration-table>
+
+            <delimiter-component>Patient Registration</delimiter-component>
+            
+            <dropdown-component
+                [data] = "replaceByName(desease, 'name')"
+                [value] = "deseaseid"
+                [id] = "'deseaseEntity'"
+                [editMode]="editMode"
+                [error] = "error?.fieldErrors"
+                (output)="dataContainer.deseaseEntity=getValueDesease($event)"
+            >{{field[4]}} <sup style="color: red; font-size: 1.3em">*</sup></dropdown-component>
+
+            <dropdown-component
+                [data] = "replaceByName(functionality, 'name')"
+                [value] = "functionalityid"
+                [id] = "'functionalityEntity'"
+                [editMode]="editMode"
+                [error] = "error?.fieldErrors"
+                (output)="dataContainer.functionalityEntity=getValueFunctionality($event)"
+            >{{field[5]}} <sup style="color: red; font-size: 1.3em">*</sup></dropdown-component>
+            
+            <div class="form-group m-t-25">
+                <div class="pull-right p-r-10">
+                    <button-flat-component [icon]="'arrow-left'" (click)="backToList(moduleName)" *ngIf="editMode || newEntry">{{text_back_to_list}}</button-flat-component>
+                    <button-flat-component [color] ="editMode ? 'primary' : 'default'" (click)="editButtonClick(this.editMode)" [icon]="editMode ? 'edit' : 'arrow-left'" *ngIf="!newEntry">{{editMode ? text_request_to_edit : text_back_to_view_mode}}</button-flat-component>
+                    <button-flat-component [color] ="'primary'" [icon]="'floppy'" (click)="submit()" *ngIf="!editMode || newEntry">{{newEntry ? text_submit : text_update}}</button-flat-component>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<!-- Modal Pasien -->
+<div class="modal fade" id="modalWider" tabindex="-1" role="dialog" aria-hidden="false" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">Pilih Pasien</h4>
+            </div>
+            <div class="modal-body">
+                <patient-table [modal]="true" (output)="modalSelect($event)"></patient-table>
+            </div>
+        </div>
+    </div>
+</div>

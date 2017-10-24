@@ -1,0 +1,84 @@
+<blockheader-component>Dashboard</blockheader-component>
+
+<div class="card">
+    <div class="card-header ch-alt">
+        <h2>Hover Row</h2>
+        <button class="btn bgm-blue btn-float waves-effect"><i class="zmdi zmdi-plus"></i></button>
+    </div>
+    
+    <table-filter-component>
+        <textbox-filter-component [id]="'nama'">Nama Depan</textbox-filter-component>
+        <textbox-filter-component [id]="'email'">Email</textbox-filter-component>
+        <textbox-filter-component [id]="'nick'">Nick Name</textbox-filter-component>
+    </table-filter-component>
+<div *ngFor="let val of statusDomain.cd">{{val}}</div>
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th *ngFor="let v of tableHeader">{{v}}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>Alexandra</td>
+                    <td>Christopher</td>
+                    <td>@makinton</td>
+                    <td>Ducky</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Madeleine</td>
+                    <td>Hollaway</td>
+                    <td>@hollway</td>
+                    <td>Cheese</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Sebastian</td>
+                    <td>Johnston</td>
+                    <td>@sebastian</td>
+                    <td>Jaycee</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>Mitchell</td>
+                    <td>Christin</td>
+                    <td>@mitchell4u</td>
+                    <td>AdskiDeAnus</td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>Elizabeth</td>
+                    <td>Belkitt</td>
+                    <td>@belkitt</td>
+                    <td>Goat</td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td>Benjamin</td>
+                    <td>Parnell</td>
+                    <td>@wayne234</td>
+                    <td>Pokie</td>
+                </tr>
+                <tr>
+                    <td>7</td>
+                    <td>Katherine</td>
+                    <td>Buckland</td>
+                    <td>@anitabelle</td>
+                    <td>Wokie</td>
+                </tr>
+                <tr>
+                    <td>8</td>
+                    <td>Nicholas</td>
+                    <td>Walmart</td>
+                    <td>@mwalmart</td>
+                    <td>Spike</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <table-pagination-component></table-pagination-component>
+</div>

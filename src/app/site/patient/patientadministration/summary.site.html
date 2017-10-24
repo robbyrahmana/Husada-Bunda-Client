@@ -1,0 +1,66 @@
+<blockheader-component>{{pageParent}}</blockheader-component>
+
+<div class="card">
+    <form class="form-horizontal" role="form" *ngIf="render">
+        <div class="card-header ch-alt">
+            <h2>{{pageName}}<small>{{pageDescription}}</small></h2>
+        </div>
+        
+        <div class="card-body card-padding">
+            
+            <delimiter-component><i class="zmdi zmdi-account m-r-5"></i>Patient Registration</delimiter-component>
+            <div class="pmbb-body p-l-30">
+                <div class="pmbb-view">
+                    <dl class="dl-horizontal">
+                        <dt>{{field[0]}}</dt>
+                        <dd>{{dataContainer.patientEntity?.titleEntity.title}} {{dataContainer.patientEntity.name}}</dd>
+                    </dl>
+                    <dl class="dl-horizontal">
+                        <dt>{{field[1]}}</dt>
+                        <dd>{{dataContainer.refnoadministrations}}</dd>
+                    </dl>
+                    <dl class="dl-horizontal">
+                        <dt>{{field[2]}}</dt>
+                        <dd>{{dataContainer.adminoption == '1' ? 'Rawat Inap' : 'Rawat Jalan'}}</dd>
+                    </dl>
+                    <dl class="dl-horizontal">
+                        <dt>{{field[3]}}</dt>
+                        <dd>{{dataContainer.inDate | date: 'dd MMMM yyyy'}}</dd>
+                    </dl>
+                    <dl class="dl-horizontal">
+                        <dt>{{field[4]}}</dt>
+                        <dd><i>{{dataContainer.roomCategoryEntity?.name}}</i> - {{dataContainer.insuranceEntity?.insurance}}</dd>
+                    </dl>
+                    <dl class="dl-horizontal">
+                        <dt>{{field[5]}}</dt>
+                        <dd>{{dataContainer.deseaseEntity.name}}</dd>
+                    </dl>
+                    <dl class="dl-horizontal">
+                        <dt>{{field[6]}}</dt>
+                        <dd>{{dataContainer.functionalityEntity.name}}</dd>
+                    </dl>
+                    <dl class="dl-horizontal" *ngIf="dataContainer.adminoption == '1'">
+                        <dt>{{field[7]}}</dt>
+                        <dd>{{dataContainer.roomDetailEntity.name}} ({{dataContainer.roomBedEntity.name}})</dd>
+                    </dl>
+                </div>
+            </div>
+
+            <delimiter-component><i class="zmdi zmdi-account m-r-5"></i>Detail Tindakan</delimiter-component>
+            <treatment-details [child]="true" [filter3]="patientAdministrationId"></treatment-details>
+
+            <delimiter-component><i class="zmdi zmdi-account m-r-5"></i>Detail Operasi</delimiter-component>
+            <operation-details [child]="true" [filter3]="patientAdministrationId"></operation-details>
+
+            <delimiter-component><i class="zmdi zmdi-account m-r-5"></i>Detail Obat</delimiter-component>
+            <medicine-details [child]="true" [filter4]="patientAdministrationId"></medicine-details>
+
+            <div class="form-group m-t-25">
+                <div class="pull-right p-r-10">
+                    <button-flat-component [icon]="'arrow-left'" (click)="backToList('patientadministration')" *ngIf="editMode || newEntry">{{text_back_to_list}}</button-flat-component>
+                    <button-flat-component [color] ="'primary'" [icon]="'floppy'" (click)="checkNew(patientAdministrationId)">Mark As Out</button-flat-component>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

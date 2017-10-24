@@ -1,0 +1,39 @@
+<blockheader-component *ngIf="!data">{{pageParent}}</blockheader-component>
+
+<div class="card">
+
+    <div class="card-header ch-alt">
+        <h2>{{pageName}}<small>{{pageDescription}}</small></h2>
+    </div>
+
+    <div class="table-responsive" *ngIf="dataPage">
+        <table class="{{tableStyle}}">
+            <thead>
+                <tr>
+                    <th *ngFor="let v of tableHeader">{{v}}</th>
+                </tr>
+            </thead>
+            <tbody *ngIf="dataPage.content.length != 0">
+                <tr *ngFor="let val of dataPage.content" class="table-vmiddle">
+                    <td>{{val.medicineEntity.name}}</td>
+                    <td>{{val.quantity}} {{val.medicineUnitConverterEntity.unitEntity.unit}}</td>
+                    <td>{{val.cost}}</td>
+                    <td>{{val.cost * val.quantity}}</td>
+                </tr>
+            </tbody>
+            <tbody *ngIf="dataPage.content.length == 0">
+                <tr class="table-vmiddle">
+                    <td class="text-center" [attr.colspan]="tableHeader.length"><i>{{no_record_found}}</i></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <br/><br/><div class="form-group">
+            <div class="pull-right p-r-10">
+                <button-flat-component [icon]="'arrow-left'" (click)="backToList('medicinerequest')">Back To List</button-flat-component>
+                <button-flat-component [color] ="'primary'" [icon]="'floppy'" (click)="checkNew(tempid)">Mark As Collected</button-flat-component>
+            </div>
+        </div><br/><br/><br/>
+
+    </div>
+</div>

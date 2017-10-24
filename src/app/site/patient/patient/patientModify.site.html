@@ -1,0 +1,284 @@
+<blockheader-component>{{pageParent}}</blockheader-component>
+
+<div class="card">
+    <form class="form-horizontal" role="form" *ngIf="roomcategory">
+        <div class="card-header ch-alt">
+            <h2>{{pageName}}<small>{{pageDescription}}</small></h2>
+        </div>
+        
+        <div class="card-body card-padding">
+            
+            <notification-component [value]="error?.error" [type]="'danger'"></notification-component>
+
+            <delimiter-component>Personal Information</delimiter-component>
+
+            <dropdown-component
+                [data] = "replaceByName(identity, 'identity')"
+                [value] = "identityid"
+                [id] = "'identityEntity'"
+                [editMode]="editMode"
+                [error] = "error?.fieldErrors"
+                (output)="dataContainer.identityEntity=getValueIdentity($event)"
+            >{{field[0]}}</dropdown-component>
+
+            <textbox-component
+                [value] = "dataContainer.identitynumber"
+                [id] = "'identitynumber'"
+                [editMode]="editMode"
+                [error] = "error?.fieldErrors"
+                (output)="dataContainer.identitynumber=$event"
+            >{{field[1]}}</textbox-component>
+            
+            <dropdown-component
+                [data] = "replaceByName(title, 'title')"
+                [value] = "titleid"
+                [id] = "'titleEntity'"
+                [editMode]="editMode"
+                [error] = "error?.fieldErrors"
+                (output)="dataContainer.titleEntity=getValueTitle($event)"
+            >{{field[2]}} <sup style="color: red; font-size: 1.3em">*</sup></dropdown-component>
+
+            <textbox-component
+                [value] = "dataContainer.name"
+                [id] = "'name'"
+                [editMode]="editMode"
+                [error] = "error?.fieldErrors"
+                (output)="dataContainer.name=$event"
+            >{{field[3]}} <sup style="color: red; font-size: 1.3em">*</sup></textbox-component>
+
+            <dropdown-component
+                [data] = "replaceByName(gender, 'gender')"
+                [value] = "genderid"
+                [id] = "'genderEntity'"
+                [editMode]="editMode"
+                [error] = "error?.fieldErrors"
+                (output)="dataContainer.genderEntity=getValueGender($event)"
+            >{{field[4]}} <sup style="color: red; font-size: 1.3em">*</sup></dropdown-component> 
+
+            <dropdown-component
+                [data] = "replaceByName(work, 'work')"
+                [value] = "workid"
+                [id] = "'workEntity'"
+                [editMode]="editMode"
+                [error] = "error?.fieldErrors"
+                (output)="dataContainer.workEntity=getValueWork($event)"
+            >{{field[5]}}</dropdown-component>
+
+            <dropdown-component
+                [data] = "replaceByName(religion, 'religion')"
+                [value] = "religionid"
+                [id] = "'religionEntity'"
+                [editMode]="editMode"
+                [error] = "error?.fieldErrors"
+                (output)="dataContainer.religionEntity=getValueReligion($event)"
+            >{{field[6]}}</dropdown-component>
+
+            <dropdown-component
+                [data] = "replaceByName(education, 'education')"
+                [value] = "educationid"
+                [id] = "'educationEntity'"
+                [editMode]="editMode"
+                [error] = "error?.fieldErrors"
+                (output)="dataContainer.educationEntity=getValueEducation($event)"
+            >{{field[7]}}</dropdown-component>
+
+            <textbox-component
+                [value] = "dataContainer.birthplace"
+                [id] = "'birthplace'"
+                [editMode]="editMode"
+                [error] = "error?.fieldErrors"
+                (output)="dataContainer.birthplace=$event"
+            >{{field[8]}}</textbox-component>
+
+            <datepicker-component
+                [value] = "dataContainer.birthday"
+                [id] = "'birthday'"
+                [editMode]="editMode"
+                [error] = "error?.fieldErrors"
+                (output)="dataContainer.birthday=$event"
+            >{{field[9]}}</datepicker-component>
+
+            <dropdown-component
+                [data] = "replaceByName(bloodgroup, 'bloodgroup')"
+                [value] = "bloodgroupid"
+                [id] = "'bloodGroupEntity'"
+                [editMode]="editMode"
+                [error] = "error?.fieldErrors"
+                (output)="dataContainer.bloodGroupEntity=getValueBloodgroup($event)"
+            >{{field[10]}}</dropdown-component>
+
+            <dropdown-component
+                [data] = "replaceByName(rhesus, 'rhesus')"
+                [value] = "rhesusid"
+                [id] = "'rhesusEntity'"
+                [editMode]="editMode"
+                [error] = "error?.fieldErrors"
+                (output)="dataContainer.rhesusEntity=getValueRhesus($event)"
+            >{{field[11]}}</dropdown-component>
+
+            <dropdown-component
+                [data] = "replaceByName(tribe, 'tribe')"
+                [value] = "tribeid"
+                [id] = "'tribeEntity'"
+                [editMode]="editMode"
+                [error] = "error?.fieldErrors"
+                (output)="dataContainer.tribeEntity=getValueTribe($event)"
+            >{{field[12]}}</dropdown-component>
+
+            <textbox-component
+                [value] = "'Indonesia'"
+                [id] = "'nationality'"
+                [editMode]="true"
+                [error] = "error?.fieldErrors"
+                (output)="dataContainer.nationality=$event"
+            >{{field[13]}}</textbox-component>
+
+            <delimiter-component>Hubungan</delimiter-component>
+
+            <dropdown-component
+                [data] = "replaceByName(relationship, 'relationship')"
+                [value] = "relationshipid"
+                [id] = "'relationshipEntity'"
+                [editMode]="editMode"
+                [error] = "error?.fieldErrors"
+                (output)="dataContainer.relationshipEntity=getValueRelationship($event)"
+            >{{field[14]}}</dropdown-component>
+
+            <textbox-component
+                [value] = "dataContainer.relationshipname"
+                [id] = "'relationshipname'"
+                [editMode]="editMode"
+                [error] = "error?.fieldErrors"
+                (output)="dataContainer.relationshipname=$event"
+            >{{field[15]}}</textbox-component>
+
+            <textbox-component
+                [value] = "dataContainer.parentname"
+                [id] = "'parentname'"
+                [editMode]="editMode"
+                [error] = "error?.fieldErrors"
+                (output)="dataContainer.parentname=$event"
+            >{{field[16]}}</textbox-component>
+
+            <delimiter-component>Contact Information</delimiter-component>
+
+            <textbox-component
+                [value] = "dataContainer.addrline1"
+                [id] = "'addrline1'"
+                [editMode]="editMode"
+                [error] = "error?.fieldErrors"
+                (output)="dataContainer.addrline1=$event"
+            >{{field[17]}}</textbox-component>
+
+            <textbox-component
+                [value] = "dataContainer.addrline2"
+                [id] = "'addrline2'"
+                [editMode]="editMode"
+                [error] = "error?.fieldErrors"
+                (output)="dataContainer.addrline2=$event"
+            >{{field[18]}}</textbox-component>
+
+            <textbox-component
+                [value] = "dataContainer.addrline3"
+                [id] = "'addrline3'"
+                [editMode]="editMode"
+                [error] = "error?.fieldErrors"
+                (output)="dataContainer.addrline3=$event"
+            >{{field[19]}}</textbox-component>
+
+            <textbox-component
+                [value] = "dataContainer.addrline4"
+                [id] = "'addrline4'"
+                [editMode]="editMode"
+                [error] = "error?.fieldErrors"
+                (output)="dataContainer.addrline4=$event"
+            >{{field[20]}}</textbox-component>
+
+            <textbox-component
+                [value] = "dataContainer.addrline5"
+                [id] = "'addrline5'"
+                [editMode]="editMode"
+                [error] = "error?.fieldErrors"
+                (output)="dataContainer.addrline5=$event"
+            >{{field[21]}}</textbox-component>
+
+            <textbox-component
+                [value] = "dataContainer.postcode"
+                [id] = "'postcode'"
+                [editMode]="editMode"
+                [error] = "error?.fieldErrors"
+                (output)="dataContainer.postcode=$event"
+            >{{field[22]}}</textbox-component>
+
+            <textbox-component
+                [value] = "dataContainer.mobilenumber"
+                [id] = "'mobilenumber'"
+                [editMode]="editMode"
+                [error] = "error?.fieldErrors"
+                (output)="dataContainer.mobilenumber=$event"
+            >{{field[23]}}</textbox-component>
+
+            <delimiter-component>Insurance Details</delimiter-component>
+
+            <dropdown-component
+                [data] = "replaceByName(insurance, 'insurance')"
+                [value] = "insuranceid"
+                [id] = "'insuranceEntity'"
+                [editMode]="editMode"
+                [error] = "error?.fieldErrors"
+                (output)="dataContainer.insuranceEntity=getValuerInsurance($event)"
+            >{{field[24]}}</dropdown-component>
+
+            <dropdown-component
+                [data] = "replaceByName(roomcategory, 'name')"
+                [value] = "roomcategoryid"
+                [id] = "'roomCategoryEntity'"
+                [editMode]="editMode"
+                [error] = "error?.fieldErrors"
+                (output)="dataContainer.roomCategoryEntity=getValueRoomcategory($event)"
+            >{{field[25]}}</dropdown-component>
+
+            <textbox-component
+                [value] = "dataContainer.insurancenumber"
+                [id] = "'insurancenumber'"
+                [editMode]="editMode"
+                [error] = "error?.fieldErrors"
+                (output)="dataContainer.insurancenumber=$event"
+            >{{field[26]}}</textbox-component>
+
+            <delimiter-component>Emergency contact</delimiter-component>
+
+            <textbox-component
+                [value] = "dataContainer.emergencyname"
+                [id] = "'emergencyname'"
+                [editMode]="editMode"
+                [error] = "error?.fieldErrors"
+                (output)="dataContainer.emergencyname=$event"
+            >{{field[27]}}</textbox-component>
+
+            <textbox-component
+                [value] = "dataContainer.emergencymobilenumber"
+                [id] = "'emergencymobilenumber'"
+                [editMode]="editMode"
+                [error] = "error?.fieldErrors"
+                (output)="dataContainer.emergencymobilenumber=$event"
+            >{{field[28]}}</textbox-component>
+
+            <textbox-component
+                [value] = "dataContainer.emergencyaddress"
+                [id] = "'emergencyaddress'"
+                [editMode]="editMode"
+                [error] = "error?.fieldErrors"
+                (output)="dataContainer.emergencyaddress=$event"
+            >{{field[29]}}</textbox-component>
+            
+            <div class="form-group m-t-25">
+                <div class="pull-right p-r-10">
+                    <button-flat-component [icon]="'arrow-left'" (click)="backToList(moduleName)" *ngIf="editMode || newEntry">{{text_back_to_list}}</button-flat-component>
+                    <button-flat-component [color] ="editMode ? 'primary' : 'default'" (click)="editButtonClick(this.editMode)" [icon]="editMode ? 'edit' : 'arrow-left'" *ngIf="!newEntry">{{editMode ? text_request_to_edit : text_back_to_view_mode}}</button-flat-component>
+                    <button-flat-component [color] ="'primary'" [icon]="'floppy'" (click)="submit()" *ngIf="!editMode || newEntry">{{newEntry ? text_submit : text_update}}</button-flat-component>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

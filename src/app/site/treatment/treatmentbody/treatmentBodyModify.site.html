@@ -1,0 +1,79 @@
+<blockheader-component>{{pageParent}}</blockheader-component>
+
+<div class="card">
+    <form class="form-horizontal" role="form" *ngIf="treatmentheader">
+        <div class="card-header ch-alt">
+            <h2>{{pageName}}<small>{{pageDescription}}</small></h2>
+        </div>
+        
+        <div class="card-body card-padding">
+            
+            <notification-component [value]="error?.error" [type]="'danger'"></notification-component>
+            <textbox-component
+                [value] = "dataContainer.cd"
+                [id] = "'cd'"
+                [editMode]="editMode"
+                [error] = "error?.fieldErrors"
+                (output)="dataContainer.cd=$event"
+            >{{field[0]}} <sup style="color: red; font-size: 1.3em">*</sup></textbox-component>
+            
+            <dropdown-component
+                [data] = "replaceByName(treatmentheader, 'name')"
+                [value] = "treatmentheaderid"
+                [id] = "'treatmentHeaderEntity'"
+                [editMode]="editMode"
+                [error] = "error?.fieldErrors"
+                (output)="dataContainer.treatmentHeaderEntity=getValue($event)"
+            >{{field[1]}} <sup style="color: red; font-size: 1.3em">*</sup></dropdown-component>
+
+            <dropdown-component
+                [data] = "replaceByName(product, 'name')"
+                [value] = "productid"
+                [id] = "'productEntity'"
+                [editMode]="editMode"
+                [error] = "error?.fieldErrors"
+                (output)="dataContainer.productEntity=getValueProduct($event)"
+            >{{field[2]}} <sup style="color: red; font-size: 1.3em">*</sup></dropdown-component>
+
+            <textbox-component
+                [value] = "dataContainer.name"
+                [id] = "'name'"
+                [editMode]="editMode"
+                [error] = "error?.fieldErrors"
+                (output)="dataContainer.name=$event"
+            >{{field[3]}}</textbox-component>
+
+            <textbox-component
+                [value] = "dataContainer.cost"
+                [id] = "'cost'"
+                [editMode]="editMode"
+                [error] = "error?.fieldErrors"
+                (output)="dataContainer.cost=$event"
+            >{{field[4]}}</textbox-component>
+
+            <textbox-component
+                [value] = "dataContainer.doktercost"
+                [id] = "'doktercost'"
+                [editMode]="editMode"
+                [error] = "error?.fieldErrors"
+                (output)="dataContainer.doktercost=$event"
+            >{{field[5]}}</textbox-component>
+
+            <textbox-component
+                [value] = "dataContainer.remark"
+                [id] = "'remark'"
+                [editMode]="editMode"
+                [error] = "error?.fieldErrors"
+                (output)="dataContainer.remark=$event"
+            >{{field[6]}}</textbox-component>
+            
+            <div class="form-group m-t-25">
+                <div class="pull-right p-r-10">
+                    <button-flat-component [icon]="'arrow-left'" (click)="backToList(moduleName)" *ngIf="editMode || newEntry">{{text_back_to_list}}</button-flat-component>
+                    <button-flat-component [color] ="editMode ? 'primary' : 'default'" (click)="editButtonClick(this.editMode)" [icon]="editMode ? 'edit' : 'arrow-left'" *ngIf="!newEntry">{{editMode ? text_request_to_edit : text_back_to_view_mode}}</button-flat-component>
+                    <button-flat-component [color] ="'primary'" [icon]="'floppy'" (click)="submit()" *ngIf="!editMode || newEntry">{{newEntry ? text_submit : text_update}}</button-flat-component>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

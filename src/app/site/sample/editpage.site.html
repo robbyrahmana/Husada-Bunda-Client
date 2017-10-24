@@ -1,0 +1,55 @@
+<blockheader-component>Dashboard</blockheader-component>
+
+<div class="card">
+    <form class="form-horizontal" role="form">
+        <div class="card-header ch-alt"><h2>{{text_header}}</h2></div>
+        
+        <div class="card-body card-padding">
+            <datepicker-component
+                [value] = "date"
+                [id] = "'date'"
+                [editMode]="editMode"
+                (output)="date=$event"
+            >Date picker</datepicker-component>
+            
+            <textbox-component
+                [value] = "text"
+                [id] = "'text'"
+                [editMode]="editMode"
+                (output)="text=$event"
+            >Input Text</textbox-component>
+            
+            <checkbox-component
+                [data] = "replaceByName(json, 'type')"
+                [value] = "checkbox"
+                [id] = "'dropdown'"
+                [editMode]="editMode"
+                (output)="checkbox=$event"
+            >Checkbox</checkbox-component>
+            
+            <radio-component
+                [data] = "replaceByName(json, 'type')"
+                [value] = "radio"
+                [id] = "'dropdown'"
+                [editMode]="editMode"
+                (output)="radio=$event"
+            >Radio Button</radio-component>
+            
+            <dropdown-component
+                [data] = "replaceByName(json, 'type')"
+                [value] = "dropvalue"
+                [id] = "'dropdown'"
+                [editMode]="editMode"
+                (output)="dropvalue=$event"
+            >Dropdown</dropdown-component>
+            
+            <div class="form-group m-t-25">
+                <div class="pull-right p-r-10">
+                    <button-flat-component [icon]="'arrow-left'" (click)="backToList(link_root)" *ngIf="!editMode || NewEntry">{{text_back_to_list}}</button-flat-component>
+                    <button-flat-component [color] ="editMode ? 'default' : 'primary'" (click)="editButtonClick()" [icon]="editMode ? 'arrow-left' : 'edit'" *ngIf="!NewEntry">{{editMode ? text_back_to_view_mode : text_request_to_edit}}</button-flat-component>
+                    <button-flat-component [color] ="'primary'" [icon]="'floppy'" *ngIf="editMode || NewEntry">{{NewEntry ? text_submit : text_update}}</button-flat-component>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

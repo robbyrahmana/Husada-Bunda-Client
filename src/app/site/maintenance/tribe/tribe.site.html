@@ -1,0 +1,33 @@
+<blockheader-component>{{pageParent}}</blockheader-component>
+
+<div class="card">
+    <div class="card-header ch-alt">
+        <h2>{{pageName}}<small>{{pageDescription}}</small></h2>
+        <button class="btn bgm-blue btn-float waves-effect" (click)="add(moduleName)"><i class="zmdi zmdi-plus"></i></button>
+    </div>
+    <br/>
+    <br/>
+    <div class="table-responsive" *ngIf="dataPage">
+        <table class="{{tableStyle}}">
+            <thead>
+                <tr>
+                    <th *ngFor="let v of tableHeader">{{v}}</th>
+                </tr>
+            </thead>
+            <tbody *ngIf="dataPage.content.length != 0">
+                <tr *ngFor="let val of dataPage.content" class="table-vmiddle">
+                    <td>{{val.tribe}}</td>
+                    <td>
+                        <table-action-component (detail)="detail(moduleName, val.id)" (delete)="delete(val.id)"></table-action-component>
+                    </td>
+                </tr>
+            </tbody>
+            <tbody *ngIf="dataPage.content.length == 0">
+                <tr class="table-vmiddle">
+                    <td class="text-center" [attr.colspan]="tableHeader.length"><i>{{no_record_found}}</i></td>
+                </tr>
+            </tbody>
+        </table>
+        <table-pagination-component [table]="self" [page]="dataPage" [pageData]="paginationData"></table-pagination-component>
+    </div>
+</div>

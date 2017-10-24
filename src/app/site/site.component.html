@@ -1,0 +1,64 @@
+<header-component [sitename]="text_site_name" [textcolorsetting]="text_color_setting"></header-component>
+        <section id="main" data-layout="layout-1">
+            <aside id="sidebar" class="sidebar c-overflow">
+                <div class="profile-menu">
+                    <a href="">
+                        <div class="profile-pic">
+                            <img src="../../assets/img/profile-pics/1.jpg" alt="">
+                        </div>
+
+                        <div class="profile-info">
+                            {{userData.name}}
+                            <i class="zmdi zmdi-caret-down"></i>
+                        </div>
+                    </a>
+
+                    <ul class="main-menu">
+                        <!--<li>
+                            <a href="profile-about.html"><i class="zmdi zmdi-account"></i> View Profile</a>
+                        </li>
+                        <li>
+                            <a href=""><i class="zmdi zmdi-lock"></i> Change Password</a>
+                        </li>-->
+                        <li>
+                            <a style="cursor: pointer" (click)="logout()"><i class="zmdi zmdi-time-restore"></i> Logout</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <ul class="main-menu">
+                    <li routerLinkActive="active">
+                        <a routerLink="./home" skipLocationChange><i class="zmdi zmdi-home"></i> Home</a>
+                    </li>
+
+                    <li class="sub-menu" routerLinkActive="active" *ngFor="let data of userMenuHeader">
+                        <a href=""><i class="zmdi zmdi-accounts-list"></i> {{data.name}}</a>
+                        <ul>
+                            <li *ngFor="let data2 of generateArray(userMenu)">
+                                <a *ngIf="(data2.menuEntity.menuHeaderEntity.id) == (data.id)" routerLink="./{{data2.menuEntity.link}}" routerLinkActive="active" skipLocationChange (click)="changelocation(data.name, data2.menuEntity.name)">{{data2.menuEntity.name}}</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                </ul>
+            </aside>           
+            
+            <section id="content">
+                <div class="container">
+                    <router-outlet></router-outlet>
+                </div>
+            </section>
+        </section>
+
+<!--
+    skipLocationChange
+    <footer-component [textfooter]="text_footer"></footer-component>
+    <nav>
+        <a routerLink="/crisis-center" routerLinkActive="active">Crisis Center</a>
+        <a routerLink="/heroes" routerLinkActive="active">Heroes</a>
+        <a routerLink="/admin" routerLinkActive="active">Admin</a>
+        <a routerLink="/login" routerLinkActive="active">Login</a>
+        <a [routerLink]="[{ outlets: { popup: ['compose'] } }]">Contact</a>
+    </nav>-->
+    
+    <!--<router-outlet name="popup"></router-outlet>-->

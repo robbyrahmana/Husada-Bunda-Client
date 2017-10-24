@@ -1,0 +1,107 @@
+<blockheader-component>{{pageParent}}</blockheader-component>
+
+<div class="card">
+    <form class="form-horizontal" role="form">
+        <div class="card-header ch-alt">
+            <h2>{{pageName}}<small>{{pageDescription}}</small></h2>
+        </div>
+        
+        <div class="card-body card-padding">
+            
+            <notification-component [value]="error?.error" [type]="'danger'"></notification-component>
+
+            <delimiter-component>Registration Details</delimiter-component>
+
+            <div class="form-group">
+                <label for="nametemp" class="col-sm-2 control-label">{{field[0]}}</label>
+                <div class="col-sm-8">
+                    <div class="fg-line">
+                        <input type="text" name="nametemp" [ngModel]="nametemp" class="form-control" disabled required>
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <button class="btn btn-primary btn-icon btn-sm waves-effect waves-circle" data-toggle="modal" href="#modalWider"><i class="zmdi zmdi-search"></i></button>
+                </div>
+            </div>
+
+            <textbox-component
+                [value] = "dataContainer?.patientAdministrationEntity?.createDate  | date: 'dd MMMM yyyy'"
+                [editMode]="true"
+            >{{field[1]}}</textbox-component>
+
+            <textbox-component
+                [value] = "dataContainer?.patientAdministrationEntity?.refnoadministrations"
+                [editMode]="true"
+            >{{field[2]}}</textbox-component>
+
+            <textbox-component
+                [value] = "dataContainer?.patientAdministrationEntity?.deseaseEntity.name"
+                [editMode]="true"
+            >{{field[3]}}</textbox-component>
+
+            <textbox-component
+                [value] = "doktertemp"
+                [editMode]="true"
+            >{{field[4]}}</textbox-component>
+
+            <delimiter-component>Insurance Details</delimiter-component>
+
+            <textbox-component
+                [value] = "dataContainer?.patientAdministrationEntity?.patientEntity?.insuranceEntity?.insurance"
+                [editMode]="true"
+            >{{field[5]}}</textbox-component>
+
+            <textbox-component
+                [value] = "dataContainer?.patientAdministrationEntity?.patientEntity?.insurancenumber"
+                [editMode]="true"
+            >{{field[6]}}</textbox-component>
+
+            <textbox-component
+                [value] = "dataContainer?.patientAdministrationEntity?.patientEntity?.roomCategoryEntity?.name"
+                [editMode]="true"
+            >{{field[7]}}</textbox-component>
+
+            <delimiter-component>Data Operasi</delimiter-component>
+            
+            <dropdown-component
+                [data] = "replaceByName(functionality, 'name')"
+                [value] = "functionalityid"
+                [id] = "'functionalityEntity'"
+                [editMode]="editMode"
+                [error] = "error?.fieldErrors"
+                (output)="dataContainer.functionalityEntity=getValueFunctionality($event)"
+            >{{field[8]}} <sup style="color: red; font-size: 1.3em">*</sup></dropdown-component>
+
+            <textbox-component
+                [value] = "dataContainer.remark"
+                [id] = "'remark'"
+                [editMode]="editMode"
+                [error] = "error?.fieldErrors"
+                (output)="dataContainer.remark=$event"
+            >{{field[9]}}</textbox-component>
+            
+            <div class="form-group m-t-25">
+                <div class="pull-right p-r-10">
+                    <button-flat-component [icon]="'arrow-left'" (click)="backToList(moduleName)" *ngIf="editMode || newEntry">{{text_back_to_list}}</button-flat-component>
+                    <button-flat-component [color] ="editMode ? 'primary' : 'default'" (click)="editButtonClick(this.editMode)" [icon]="editMode ? 'edit' : 'arrow-left'" *ngIf="!newEntry">{{editMode ? text_request_to_edit : text_back_to_view_mode}}</button-flat-component>
+                    <button-flat-component [color] ="'primary'" [icon]="'floppy'" (click)="submit()" *ngIf="!editMode || newEntry">Selanjutnya</button-flat-component>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<!-- Modal Pasien Administrator-->
+<div class="modal fade" id="modalWider" tabindex="-1" role="dialog" aria-hidden="false" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">Pilih Pasien</h4>
+            </div>
+            <div class="modal-body">
+                <patientadministration-table [child]="true" [modal]="true" (output)="modalSelect($event)"></patientadministration-table>
+            </div>
+        </div>
+    </div>
+</div>

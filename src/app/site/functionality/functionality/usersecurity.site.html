@@ -1,0 +1,45 @@
+<blockheader-component *ngIf="!data">{{pageParent}}</blockheader-component>
+
+<div class="card">
+    <form class="form-horizontal" role="form" *ngIf="true">
+        <div class="card-header ch-alt">
+            <h2>{{pageName}}<small>{{pageDescription}}</small></h2>
+        </div>
+        
+        <div class="card-body card-padding">
+            
+            <notification-component [value]="error?.error" [type]="'danger'"></notification-component>
+
+            <textbox-component
+                [value] = "dataContainer.username"
+                [id] = "'username'"
+                [editMode]="true"
+                [error] = "error?.fieldErrors"
+                (output)="dataContainer.username=$event"
+            >{{field[0]}}</textbox-component>
+
+            <textbox-component
+                [value] = "dataContainer.password"
+                [id] = "'password'"
+                [editMode]="editMode"
+                [error] = "error?.fieldErrors"
+                (output)="dataContainer.password=$event"
+            >{{field[1]}}</textbox-component>
+
+            <dropdown-component
+                [data] = "replaceByName(usergroup, 'name')"
+                [value] = "usergroupid"
+                [id] = "'userGroupEntity'"
+                [editMode]="editMode"
+                [error] = "error?.fieldErrors"
+                (output)="dataContainer.userGroupEntity=getValueUserGroup($event)"
+            >{{field[2]}}</dropdown-component>
+            
+            <div class="form-group m-t-25">
+                <div class="pull-right p-r-10">
+                    <button-flat-component [color] ="'primary'" [icon]="'floppy'" (click)="submit()" *ngIf="!newEntry">{{newEntry ? text_submit : text_update}}</button-flat-component>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

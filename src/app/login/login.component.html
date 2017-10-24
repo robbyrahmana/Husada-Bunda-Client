@@ -1,0 +1,32 @@
+<!-- Login -->
+<div class="lc-block toggled" id="l-login">
+    <img class="lcb-user" src="../../assets/img/profile-pics/1.jpg" alt="">
+    <br/><br/>
+    <div class="input-group m-b-20">
+        <span class="input-group-addon"><i class="zmdi zmdi-account"></i></span>
+        <div class="fg-line">
+            <input type="text" [(ngModel)]="username" class="form-control" placeholder="Username">
+        </div>
+    </div>
+    
+    <div class="input-group m-b-20">
+        <span class="input-group-addon"><i class="zmdi zmdi-male"></i></span>
+        <div class="fg-line">
+            <input type="password" [(ngModel)]="password" class="form-control" placeholder="Password">
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="alert alert-danger" role="alert" *ngIf="!loginIndicator">
+        <b>Login failed</b><br/>Invalid Username and/or Password, Please try again !
+    </div>
+    <div class="loader" *ngIf="loader">
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+    </div>
+    <a class="btn btn-login btn-danger btn-float waves-effect waves-circle waves-float" (click)="login()"><i class="zmdi zmdi-arrow-forward"></i></a>
+
+</div>

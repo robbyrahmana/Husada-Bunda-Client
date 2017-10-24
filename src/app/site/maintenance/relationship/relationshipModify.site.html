@@ -1,0 +1,30 @@
+<blockheader-component>{{pageParent}}</blockheader-component>
+
+<div class="card">
+    <form class="form-horizontal" role="form" *ngIf="true">
+        <div class="card-header ch-alt">
+            <h2>{{pageName}}<small>{{pageDescription}}</small></h2>
+        </div>
+        
+        <div class="card-body card-padding">
+            
+            <notification-component [value]="error?.error" [type]="'danger'"></notification-component>
+
+            <textbox-component
+                [value] = "dataContainer.relationship"
+                [id] = "'relationship'"
+                [editMode]="editMode"
+                [error] = "error?.fieldErrors"
+                (output)="dataContainer.relationship=$event"
+            >{{field[0]}} <sup style="color: red; font-size: 1.3em">*</sup></textbox-component>
+            
+            <div class="form-group m-t-25">
+                <div class="pull-right p-r-10">
+                    <button-flat-component [icon]="'arrow-left'" (click)="backToList(moduleName)" *ngIf="editMode || newEntry">{{text_back_to_list}}</button-flat-component>
+                    <button-flat-component [color] ="editMode ? 'primary' : 'default'" (click)="editButtonClick(this.editMode)" [icon]="editMode ? 'edit' : 'arrow-left'" *ngIf="!newEntry">{{editMode ? text_request_to_edit : text_back_to_view_mode}}</button-flat-component>
+                    <button-flat-component [color] ="'primary'" [icon]="'floppy'" (click)="submit()" *ngIf="!editMode || newEntry">{{newEntry ? text_submit : text_update}}</button-flat-component>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

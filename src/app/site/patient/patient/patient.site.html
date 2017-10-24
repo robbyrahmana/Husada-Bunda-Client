@@ -1,0 +1,39 @@
+<blockheader-component *ngIf="!modal">{{pageParent}}</blockheader-component>
+
+<div class="card">
+    <div class="card-header ch-alt" *ngIf="!modal">
+        <h2>{{pageName}}<small>{{pageDescription}}</small></h2>
+        <button class="btn bgm-blue btn-float waves-effect" (click)="add(moduleName)"><i class="zmdi zmdi-plus"></i></button>
+    </div>
+    
+    <table-filter-component (output)="filterData()">
+        <textbox-filter-component [id]="'filter1'" [(data)]="filter1" (output)="filter1=$event">Kode Pasien</textbox-filter-component>
+        <textbox-filter-component [id]="'filter2'" [(data)]="filter2" (output)="filter2=$event">Nama Pasien</textbox-filter-component>
+    </table-filter-component>
+    <div class="table-responsive" *ngIf="dataPage">
+        <table class="{{tableStyle}}">
+            <thead>
+                <tr>
+                    <th *ngFor="let v of tableHeader">{{v}}</th>
+                </tr>
+            </thead>
+            <tbody *ngIf="dataPage.content.length != 0">
+                <tr *ngFor="let val of dataPage.content" class="table-vmiddle">
+                    <td>{{val.refnopatient}}</td>
+                    <td>{{val.titleEntity.title}} {{val.name}}</td>
+                    <td>{{val.birthplace}}/{{val.birthday | date: 'dd MMMM yyyy'}}</td>
+                    <td><i>{{val.roomCategoryEntity?.name}}</i> - {{val.insuranceEntity?.insurance}}</td>
+                    <td>
+                        <table-action-component (detail)="detail(moduleName, val.id)" (print)="download(val)" (delete)="delete(val.id)" (select)="selectData(val)" [modalFlag]="modal" [printFlag]="false" [detailFlag]="!modal"></table-action-component>
+                    </td>
+                </tr>
+            </tbody>
+            <tbody *ngIf="dataPage.content.length == 0">
+                <tr class="table-vmiddle">
+                    <td class="text-center" [attr.colspan]="tableHeader.length"><i>{{no_record_found}}</i></td>
+                </tr>
+            </tbody>
+        </table>
+        <table-pagination-component [filter1] = "filter1" [table]="self" [page]="dataPage" [pageData]="paginationData"></table-pagination-component>
+    </div>
+</div>
