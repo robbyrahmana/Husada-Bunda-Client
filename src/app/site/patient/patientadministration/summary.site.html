@@ -49,8 +49,19 @@
             <delimiter-component><i class="zmdi zmdi-account m-r-5"></i>Detail Tindakan</delimiter-component>
             <treatment-details [child]="true" [filter3]="patientAdministrationId"></treatment-details>
 
+            <!--
+            RSSYSE-12
+            Start Fix : adding condition if 'Rawat Inap'
+            OLD:
             <delimiter-component><i class="zmdi zmdi-account m-r-5"></i>Detail Operasi</delimiter-component>
             <operation-details [child]="true" [filter3]="patientAdministrationId"></operation-details>
+            NEW
+            -->
+            <delimiter-component *ngIf="dataContainer.adminoption == '1'"><i class="zmdi zmdi-account m-r-5"></i>Detail Operasi</delimiter-component>
+            <operation-details [child]="true" [filter3]="patientAdministrationId" *ngIf="dataContainer.adminoption == '1'"></operation-details>
+            <!--
+            End Fix
+            -->
 
             <delimiter-component><i class="zmdi zmdi-account m-r-5"></i>Detail Obat</delimiter-component>
             <medicine-details [child]="true" [filter4]="patientAdministrationId"></medicine-details>
