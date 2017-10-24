@@ -133,6 +133,10 @@ export class IPDPatientModifySite extends EditHelper implements Edit{
     modalSelect(data: any) {
         this.dataContainer.patientEntity=data;
 
+        /*
+        RSSYSE-15
+        Start Fix : more validation if user didt choose isurance number and class
+        OLD :
         //to check user have insurance or not
         if(this.dataContainer.patientEntity.insuranceEntity) {
             this.dataContainer.insuranceEntity=this.dataContainer.patientEntity.insuranceEntity;
@@ -146,6 +150,28 @@ export class IPDPatientModifySite extends EditHelper implements Edit{
                     this.roomdetail = data;
             });
         }
+        NEW : 
+        */
+        if(this.dataContainer.patientEntity.insuranceEntity) {
+            this.dataContainer.insuranceEntity=this.dataContainer.patientEntity.insuranceEntity;
+        }
+        if(this.dataContainer.patientEntity.roomCategoryEntity) {
+            this.dataContainer.roomCategoryEntity=this.dataContainer.patientEntity.roomCategoryEntity;
+        }
+        if(this.dataContainer.patientEntity.insurancenumber) {
+            this.dataContainer.insurancenumber=this.dataContainer.patientEntity.insurancenumber;
+        }
+        if(this.dataContainer.patientEntity.roomCategoryEntity) {
+            //Get room by insurance
+            let observable: Observable<RoomDetail> = this.dataService_room.getRoomDetailByCategoryId(this.dataContainer.patientEntity.roomCategoryEntity.id);
+                observable.subscribe(data => {
+                    this.roomdetail = new RoomDetail();
+                    this.roomdetail = data;
+            });
+        }
+        /*  
+        End fix 
+        */
         this.filter1=this.dataContainer.patientEntity.refnopatient;
         this.filter2=this.dataContainer.patientEntity.name;
 
