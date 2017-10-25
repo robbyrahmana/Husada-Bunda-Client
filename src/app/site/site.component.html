@@ -32,8 +32,24 @@
                     </li>
 
                     <li class="sub-menu" routerLinkActive="active" *ngFor="let data of userMenuHeader">
-                        <a href=""><i class="zmdi zmdi-accounts-list"></i> {{data.name}}</a>
-                        <ul>
+                        <a href="" *ngIf="!data.menuHeaderEntity"><i class="zmdi zmdi-accounts-list"></i> {{data.name}}</a>
+                        <ul *ngIf="!data.menuHeaderEntity">
+                            <!--
+                            RSSYSE-14
+                            Start Fix : add parent id of header for multilevel
+                            NEW
+                            -->
+                            <li class="sub-menu" routerLinkActive="active" *ngFor="let data3 of userMenuHeader">
+                                <a href="" *ngIf="data3.menuHeaderEntity?.id == data.id">{{data3.name}}</a>
+                                <ul *ngIf="data3.menuHeaderEntity?.id == data.id">
+                                    <li *ngFor="let data4 of generateArray(userMenu)">
+                                        <a *ngIf="(data4.menuEntity.menuHeaderEntity.id) == (data3.id)" routerLink="./{{data4.menuEntity.link}}" routerLinkActive="active" skipLocationChange (click)="changelocation(data3.name, data4.menuEntity.name)">{{data4.menuEntity.name}}</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <!--
+                            End Fix
+                            -->
                             <li *ngFor="let data2 of generateArray(userMenu)">
                                 <a *ngIf="(data2.menuEntity.menuHeaderEntity.id) == (data.id)" routerLink="./{{data2.menuEntity.link}}" routerLinkActive="active" skipLocationChange (click)="changelocation(data.name, data2.menuEntity.name)">{{data2.menuEntity.name}}</a>
                             </li>
@@ -49,7 +65,7 @@
                 </div>
             </section>
         </section>
-
+        
 <!--
     skipLocationChange
     <footer-component [textfooter]="text_footer"></footer-component>

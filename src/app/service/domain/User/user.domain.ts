@@ -20,6 +20,15 @@ export class MenuHeader {
         public id?: string, 
         public name?: string,
         public icon?: string,
+        /*
+        RSSYSE-14
+        Start Fix : add parent id of header for multilevel
+        NEW
+        */
+        public menuHeaderEntity?: MenuHeader, 
+        /*
+        End Fix
+        */
         public seqNo?: number
     ){}
 }
